@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.urls import reverse
+from django.http import HttpResponse
+
 
 DATA = {
     'omlet': {
@@ -10,7 +13,7 @@ DATA = {
         'макароны, г': 0.3,
         'сыр, г': 0.05,
     },
-    'buter': {
+    'sandwich': {
         'хлеб, ломтик': 1,
         'колбаса, ломтик': 1,
         'сыр, ломтик': 1,
@@ -18,6 +21,47 @@ DATA = {
     },
     # можете добавить свои рецепты ;)
 }
+
+
+def omlet(request):
+    serving = int(request.GET.get('serving', 1))
+    new_dict = {}
+    for ingr, amount in DATA.items():
+        new_dict[ingr] = {}
+        for new_k, new_v in amount.items():
+            new_dict[ingr][new_k] = round(new_v * serving, 3)
+
+    context = {
+        'recipe': new_dict['omlet'],
+    }
+    return render(request, 'calculator/index.html', context)
+
+
+def pasta(request):
+    serving = int(request.GET.get('serving', 1))
+    new_dict = {}
+    for ingr, amount in DATA.items():
+        new_dict[ingr] = {}
+        for new_k, new_v in amount.items():
+            new_dict[ingr][new_k] = round(new_v * serving, 3)
+
+    context = {
+        'recipe': new_dict['pasta'],
+    }
+    return render(request, 'calculator/index.html', context)
+
+def sandwich(request):
+    serving = int(request.GET.get('serving', 1))
+    new_dict = {}
+    for ingr, amount in DATA.items():
+        new_dict[ingr] = {}
+        for new_k, new_v in amount.items():
+            new_dict[ingr][new_k] = round(new_v * serving, 3)
+
+    context = {
+        'recipe': new_dict['sandwich'],
+    }
+    return render(request, 'calculator/index.html', context)
 
 # Напишите ваш обработчик. Используйте DATA как источник данных
 # Результат - render(request, 'calculator/index.html', context)
