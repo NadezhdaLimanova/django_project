@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-
+from models import Phone
 
 def index(request):
     return redirect('catalog')
@@ -7,7 +7,10 @@ def index(request):
 
 def show_catalog(request):
     template = 'catalog.html'
-    context = {}
+
+    context = { 'name' = Phone.name
+
+    }
     return render(request, template, context)
 
 
