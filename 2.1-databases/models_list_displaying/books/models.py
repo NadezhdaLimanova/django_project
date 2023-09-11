@@ -1,7 +1,7 @@
 # coding=utf-8
 
 from django.db import models
-
+from autoslug import AutoSlugField
 
 class Book(models.Model):
     name = models.CharField(u'Название', max_length=64)
@@ -10,3 +10,5 @@ class Book(models.Model):
 
     def __str__(self):
         return self.name + " " + self.author
+
+

@@ -15,6 +15,11 @@
               <p>Дата публикации: {{ book.pub_date|date:'Y-m-d' }}</p>
             </div>
         {% endfor %}
+            </div>
         </div>
     </div>
+    <a href = "{% url 'books' %}/{{ previous_book }}"  <buttom> {{ previous_book }} </buttom></a>
+    <a href = "{% url 'books' %}/{{ next_book }}" <buttom> {{ next_book }} </buttom></a>
+
 {% endblock %}
+
