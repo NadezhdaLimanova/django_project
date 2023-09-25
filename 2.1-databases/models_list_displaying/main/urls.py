@@ -19,7 +19,6 @@ from books.models import Book
 from books.views import books_view, book_detail
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
     path('', books_view, name='index'),
     path('books', books_view, name='books'),
     path('books/<str:pub_date>/', book_detail, name='date'),

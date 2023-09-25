@@ -1,8 +1,5 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from books.models import Book
-from django.core.paginator import Paginator
-
-from datetime import datetime, timedelta
 
 def books_view(request):
     books = Book.objects.all()
@@ -30,3 +27,4 @@ def book_detail(request, pub_date):
         'previous_book': previous_book
                }
     return render(request, template, context)
+
