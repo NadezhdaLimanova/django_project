@@ -91,6 +91,8 @@ DATABASES = {
         'NAME': 'netology_classified_ads',
         'HOST': '127.0.0.1',
         'PORT': '5432',
+        'USER': 'postgres',
+        'PASSWORD': 'lastochka86',
     }
 }
 
@@ -132,3 +134,26 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+
+    ],
+    'SEARCH_PARAM': 'q',
+    'ORDERING_PARAM': 'o',
+    'DEFAULT_AUTHENTICATION_CLASSES':[
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_THROTTLE_CLASSES': [
+        # 'rest_framework.throttling.UserRateThrottle',
+        # 'rest_framework.throttling.AnonRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '20/minute',
+        'user': '10/minute',
+    }
+
+}
