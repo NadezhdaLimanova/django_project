@@ -22,8 +22,6 @@ class AdvertisementViewSet(ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(creator=self.request.user)
 
-    # TODO: настройте ViewSet, укажите атрибуты для кверисета,
-    #   сериализаторов и фильтров
 
     def get_permissions(self):
         """Получение прав для действий."""
