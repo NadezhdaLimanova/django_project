@@ -11,16 +11,11 @@ from students.models import Course, Student
 def client():
     return APIClient()
 
-@pytest.fixture
-def user():
-    return User.objects.create_user('admin')
-
 
 @pytest.fixture
 def courses_factory():
     def factory(*args, **kwargs):
         return baker.make(Course, *args, **kwargs)
-
     return factory
 
 
@@ -28,7 +23,6 @@ def courses_factory():
 def student_factory():
     def factory(*args, **kwargs):
         return baker.make(Student, *args, **kwargs)
-
     return factory
 
 
@@ -58,11 +52,9 @@ def test_get_course_list(client, courses_factory):
 
     # Assert
     assert response.status_code == 200
-
     assert len(data) == len(courses)
     for i, m in enumerate(data):
            assert m['id'] == courses[i].id
-
 
 
 @pytest.mark.django_db
@@ -96,7 +88,9 @@ def test_filter_courses_name(client, courses_factory):
 
 
 @pytest.mark.django_db
-def test_create_course(client, user):
+def test_create_course(client):
+
+    User.objects.create_user('admin')
     count = Course.objects.count()
 
     response = client.post('/courses/', data={'name': 'math', 'students': []})
